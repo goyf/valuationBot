@@ -1,4 +1,4 @@
-#ValuationBOT
+# ValuationBOT
 
 ValuationBOT scans a list of companies and tries to evaluate their cost
 
@@ -16,4 +16,5 @@ To-do list:
 5. Either dump or save the company
 
 There is no licence yet
+
 Also, if you ever use this, you are responsible for your money and well-being, not me.
