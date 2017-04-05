@@ -1,19 +1,21 @@
-# ValuationBOT
+# ValuationBOT project
 
-ValuationBOT scans a list of companies and tries to evaluate their cost
+## Version 1.0
 
-How it should work:
-1. Valuation bot receives a link to an SEC website
-2. Downloads the first 10-Q filling on the list
-3. Evaluates it somehow
-4. If undervalued, it saves it to a list
+### Simple feature list
+* Pull SEC links of companies from a list
+* Download the latest 10-Q filing using handmade script in an Excel format
+* Pull out values from the file and download stock price of Yahoo! Finance
+* Calculate the enterprise value and debt-to-cash ratio
 
-To-do list:
-1. Load SP500 companies - Done
-2. Visit their SEC page - Done
-3. Find 10-Q for each of the companies and download it - Done
-4. Do some basic valuation - Done
-5. Either dump or save the company
+### Acknowledgements
+* The script downloads a filing if and only if it is on the first page
+  * This might get fixed in this version or the next one
+* Different companies call their debt and net income differently
+  * Fixable by manualling going through filings and finding the most used combinations of words
+* Saving the values of EV and leverage could be done if needed
+
+Suggestions welcome
 
 There is no licence yet
 
