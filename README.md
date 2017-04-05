@@ -12,7 +12,7 @@ To-do list:
 1. Load SP500 companies - Done
 2. Visit their SEC page - Done
 3. Find 10-Q for each of the companies and download it - Done
-4. Do some basic valuation
+4. Do some basic valuation - Done
 5. Either dump or save the company
 
 There is no licence yet
