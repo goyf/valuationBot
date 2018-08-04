@@ -13,7 +13,6 @@ import urllib.request
 url = 'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000001800&type=&dateb=&owner=include&start=80&count=40'
 r = requests.get(url)
 html_content = r.text
-
 soup = BeautifulSoup(html_content, 'lxml')
 
 file = open("html.txt", 'w')
@@ -21,7 +20,6 @@ file.write(html_content)
 file = open('html.txt', 'r')
 
 lookup = '10-Q'
-
 gotLine = False
 for i, line in enumerate(file, 1):
     if gotLine == True:
