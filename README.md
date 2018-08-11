@@ -5,7 +5,7 @@
 ### Simple feature list
 * Pull SEC links of companies from a list
 * Download the latest 10-Q filing using handmade script in an Excel format
-* Search for stocks monthly graph from Alpha Vantage
+* Search for stocks graph from Alpha Vantage
 
 
 Suggestions welcome
