@@ -1,5 +1,8 @@
 # ValuationBOT project
 
+* Python 2.7
+* doomberg_terminal.py is the main file to run
+
 ## Version 1.0
 
 ### Simple feature list
