@@ -72,37 +72,30 @@ class stockClass:
         
         ts = TimeSeries(key='Z4GYC8KFAQZCUZ51', output_format='pandas')
         data, meta_data = ts.get_weekly_adjusted(symbol=self.comp_name)
-        x = np.array(data['4. close'])
-        v = np.array(list(data.index))
+        price_values = np.array(data['4. close'])
+        time_values = np.array(list(data.index))
         
         short_mva = (data['4. close']).rolling(window=20).mean()
-        short_mva.head(20)
         short_mva = np.array(short_mva)
         
         long_mva = (data['4. close']).rolling(window=50).mean()
-        long_mva.head(50)
         long_mva = np.array(long_mva)
 
-        #Pandas are much more powerful, I should use them
-        time_ratio = 1.1
+        time_ratio = 2.1 #This magic number is for time range. I should use ['date'] instead
         fig = Figure(figsize=(10,6))
-        a = fig.add_subplot(111)
-        b = fig.add_subplot(111)
-        a.plot(v[int(len(v)/time_ratio):len(v)],x[int(len(x)/time_ratio):len(x)],color='red')
-        a.plot(v[int(len(v)/time_ratio):len(v)],short_mva[int(len(short_mva)/time_ratio):len(short_mva)],color='blue')
-        a.plot(v[int(len(v)/time_ratio):len(v)],long_mva[int(len(long_mva)/time_ratio):len(long_mva)], color = 'green')
-        #a.plot(v,x,color='red')
-        #a.plot(v,short_mva,color='blue')
-        #a.plot(v,long_mva, color = 'green')
+        main_window = fig.add_subplot(111)
+        main_window.plot(time_values[int(len(time_values)/time_ratio):len(time_values)],price_values[int(len(price_values)/time_ratio):len(price_values)],color='red')
+        main_window.plot(time_values[int(len(time_values)/time_ratio):len(time_values)],short_mva[int(len(short_mva)/time_ratio):len(short_mva)],color='blue')
+        main_window.plot(time_values[int(len(time_values)/time_ratio):len(time_values)],long_mva[int(len(long_mva)/time_ratio):len(long_mva)], color = 'green')
 
-        a.set_title (info_label, fontsize=16)
-        a.set_ylabel("Price", fontsize=14)
-        a.set_xlabel("Date", fontsize=14)
-        a.xaxis.set_major_locator(MaxNLocator(6))
+        main_window.set_title (info_label, fontsize=16)
+        main_window.set_ylabel("Price", fontsize=14)
+        main_window.set_xlabel("Date", fontsize=14)
+        main_window.xaxis.set_major_locator(MaxNLocator(6))
 
         canvas = FigureCanvasTkAgg(fig, master=self.window)
         canvas.get_tk_widget().grid(row=3,column=0, rowspan=4, columnspan=3)
         canvas.draw()        
         
         Label(self.window, text="Current Price:", relief=GROOVE).grid(row=3, column=3, sticky="NW")
-        Label(self.window, text=str(x[len(x)-1]) + '$', relief=GROOVE).grid(row=3, column=4, sticky='NE')
+        Label(self.window, text=str(price_values[len(price_values)-1]) + '$', relief=GROOVE).grid(row=3, column=4, sticky='NE')
