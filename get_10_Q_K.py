@@ -28,7 +28,6 @@ def get_10_Q_K(ticker):
 	        if gotLine == 1:
 	            searchLine = line
 	            gotLine += 1
-	            #print ("sup")
 	        if lookup in line:
 	            foundLine = i + 1
 	            gotLine += 1
