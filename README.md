@@ -8,8 +8,18 @@
 ### Simple feature list
 * Pull SEC links of companies from a list
 * Download the latest 10-Q filing using handmade script in an Excel format
-* Search for stocks graph from Alpha Vantage
+* Search for stocks graph using Alpha Vantage
 
+### Library list
+Requests
+Beautiful Soup
+urllib
+xlrd
+datapackage
+Tkinter
+alpha_vantage
+matplotlib
+numpy (formerly used pandas as well)
 
 Suggestions welcome
 
