@@ -1,3 +1,6 @@
+#Creates a GUI and plots stock graph + 10-Q functions
+#First searches the NYSE and then NASDAQ for the ticker
+
 from datapackage import Package
 from Tkinter import *
 from math import *
@@ -18,6 +21,7 @@ import get_10_Q_K
 packageNYSE = Package('https://datahub.io/core/nyse-other-listings/datapackage.json')
 packageNASDAQ = Package('https://datahub.io/core/nasdaq-listings/datapackage.json')
 
+#Main window
 class stockClass:
     def __init__(self,  window):
         self.window = window
@@ -34,6 +38,7 @@ class stockClass:
         
         self.title = Label(self.window, text="Company ticker", relief=FLAT).grid(row=0,column=0, sticky="NW")
         
+    #Finds the company through Alpha Vantage
     def findComp(self, name):   
         for resource in packageNYSE.resources:
     #if resource.descriptor['datahub']['type'] == 'derived/csv':
@@ -70,17 +75,21 @@ class stockClass:
         
         info_label = self.findComp(self.comp_name)      
         
+        #Get your own API key
         ts = TimeSeries(key='Z4GYC8KFAQZCUZ51', output_format='pandas')
         data, meta_data = ts.get_weekly_adjusted(symbol=self.comp_name)
         price_values = np.array(data['4. close'])
         time_values = np.array(list(data.index))
         
+        #Short and long moving average filters to detect momentum
         short_mva = (data['4. close']).rolling(window=20).mean()
         short_mva = np.array(short_mva)
         
         long_mva = (data['4. close']).rolling(window=50).mean()
         long_mva = np.array(long_mva)
 
+
+        #Graph plotting
         time_ratio = 2.1 #This magic number is for time range. I should use ['date'] instead
         fig = Figure(figsize=(10,6))
         main_window = fig.add_subplot(111)
@@ -97,5 +106,6 @@ class stockClass:
         canvas.get_tk_widget().grid(row=3,column=0, rowspan=4, columnspan=3)
         canvas.draw()        
         
+        #Some additional info
         Label(self.window, text="Current Price:", relief=GROOVE).grid(row=3, column=3, sticky="NW")
         Label(self.window, text=str(price_values[len(price_values)-1]) + '$', relief=GROOVE).grid(row=3, column=4, sticky='NE')

@@ -1,20 +1,22 @@
+#Gets the most recent 10-Q file from SEC Edgar
+
 import requests
 from bs4 import BeautifulSoup
 import urllib
 import xlrd
 
 def get_10_Q_K(ticker):
-	results_per_page = 100 #10,20,40,80,100
+	results_per_page = 100
 	current_page = 0
-	#ticker = 'AAPL'
 	gotLine = 0
+
+	#Finds parses the website and finds the line with 10-Q
+	#The url has a certain format, so I am taking advantage of that
 
 	while(gotLine == 0):
 	    url = 'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=' + ticker + '&type=&dateb=&owner=exclude&start=' \
 	    + str(current_page*results_per_page) + '&count=' + str(results_per_page)
 	    r = requests.get(url)    
-	    
-	    #print(url)
 
 	    html_content = r.text
 	    soup = BeautifulSoup(html_content, 'lxml')
@@ -38,15 +40,8 @@ def get_10_Q_K(ticker):
 
 	soup = BeautifulSoup(searchLine, 'lxml')
 	all_links = []
-	#findA = soup.find_all('a')
 
 	testFind = soup.find('a', {'id' : 'interactiveDataBtn'})
-	#print(testFind['href'])
-	#for link in findA:
-	#            if '&nbsp;Documents' in link.text:
-	#                all_links.append(link['href'])
-	                
-	#print(all_links)
 
 	#Opens a 10-Q link and saves it
 
@@ -54,8 +49,6 @@ def get_10_Q_K(ticker):
 	url = url + testFind['href']
 	r = requests.get(url)
 	html_content = r.text
-
-	#print(url)
 
 	soup = BeautifulSoup(html_content, 'lxml')
 
@@ -74,5 +67,4 @@ def get_10_Q_K(ticker):
 
 	url = 'https://www.sec.gov'
 	url = url + all_links[0]
-	#print(url)
 	urllib.urlretrieve(url, '10Q'+ticker+'.xlsx')

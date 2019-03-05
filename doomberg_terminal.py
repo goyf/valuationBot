@@ -1,3 +1,5 @@
+#The main code to run
+
 from Tkinter import *
 import terminal
 
