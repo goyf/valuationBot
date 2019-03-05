@@ -11,15 +11,15 @@
 * Search for stocks graph using Alpha Vantage
 
 ### Library list
-Requests
-Beautiful Soup
-urllib
-xlrd
-datapackage
-Tkinter
-alpha_vantage
-matplotlib
-numpy (formerly used pandas as well)
+* Requests
+* Beautiful Soup
+* urllib
+* xlrd
+* datapackage
+* Tkinter
+* alpha_vantage
+* matplotlib
+* numpy (formerly used pandas as well)
 
 Suggestions welcome
 
